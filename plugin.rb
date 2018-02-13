@@ -1,9 +1,9 @@
-# name: hide-pizza
+# name: hide_pizza
 # about: Hide pizzas discourse plugin.
 # version: 0.0.1
 # authors: Tom Grobbe
 
-enabled_site_setting :hide_devs_enabled
+enabled_site_setting :hide_pizza_enabled
 
 require_dependency 'post_creator'
 require_dependency 'topic_creator'
@@ -41,7 +41,7 @@ after_initialize do
 
 	DiscourseEvent.on(:post_created) do |post, opts, user|
 		next unless user.group_ids.include? hide.id
-		if SiteSetting.hide_devs_enabled
+		if SiteSetting.hide_pizza_enabled
 			PostOwnerChanger.new( post_ids: [post.id],
 					topic_id: post.topic_id,
 					new_owner: pizzaGroup.users.sample,

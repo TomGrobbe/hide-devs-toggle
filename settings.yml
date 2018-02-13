@@ -1,4 +1,4 @@
 plugins:
-  hide_devs_enabled:
+  hide_pizza_enabled:
     default: true
     client: true
