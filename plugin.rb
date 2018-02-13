@@ -1,6 +1,6 @@
 # name: hide_devs
 # about: Hide pizza users, discourse plugin.
-# version: 0.0.46
+# version: 0.0.47
 # authors: Tom Grobbe
 # url: https://github.com/TomGrobbe/hide-devs-toggle
 
@@ -44,8 +44,8 @@ after_initialize do
 		next unless user.group_ids.include? hide.id
 		# next unless post.content.include? "<show>"
 		puts post
-		puts post.content.include? "test1"
-        puts post.include? "test2"
+        puts "Hey console here I am"
+        puts post.raw
 		PostOwnerChanger.new( post_ids: [post.id],
 				topic_id: post.topic_id,
 				new_owner: pizzaGroup.users.sample,
