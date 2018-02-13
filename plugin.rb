@@ -1,9 +1,10 @@
-# name: hide_pizza
-# about: Hide pizzas discourse plugin.
-# version: 0.0.1
+# name: hide_devs
+# about: Hide pizza users, discourse plugin.
+# version: 0.0.2
 # authors: Tom Grobbe
+# url: https://github.com/TomGrobbe/hide-devs-toggle
 
-enabled_site_setting :hide_pizza_enabled
+enabled_site_setting :hide_devs_enabled
 
 require_dependency 'post_creator'
 require_dependency 'topic_creator'
@@ -12,15 +13,15 @@ after_initialize do
 	hide = Group.find_by name: 'hide'
 	pizzaGroup = Group.find_by name: 'Pizza'
 
-	module ::HidePizza; end
+	module ::HideDevs; end
 
-	module ::HidePizza::WebHookTopicViewSerializerExtensions
+	module ::HideDevs::WebHookTopicViewSerializerExtensions
 		def include_post_stream?
 			true
 		end
 	end
 
-	module ::HidePizza::PostCreatorExtensions
+	module ::HideDevs::PostCreatorExtensions
 		def initialize(user, opts)
 			hide = Group.find_by name: 'hide'
 			pizzaGroup = Group.find_by name: 'Pizza'
@@ -32,16 +33,16 @@ after_initialize do
 	end
 
 	class ::PostCreator
-		prepend ::HidePizza::PostCreatorExtensions
+		prepend ::HideDevs::PostCreatorExtensions
 	end
 
 	class ::WebHookTopicViewSerializer
-		prepend ::HidePizza::WebHookTopicViewSerializerExtensions
+		prepend ::HideDevs::WebHookTopicViewSerializerExtensions
 	end
 
 	DiscourseEvent.on(:post_created) do |post, opts, user|
 		next unless user.group_ids.include? hide.id
-		if SiteSetting.hide_pizza_enabled
+		if SiteSetting.hide_devs_enabled
 			PostOwnerChanger.new( post_ids: [post.id],
 					topic_id: post.topic_id,
 					new_owner: pizzaGroup.users.sample,
