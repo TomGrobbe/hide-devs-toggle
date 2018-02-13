@@ -1,6 +1,6 @@
 # name: hide_devs
 # about: Hide pizza users, discourse plugin.
-# version: 0.0.478
+# version: 0.0.501
 # authors: Tom Grobbe
 # url: https://github.com/TomGrobbe/hide-devs-toggle
 
@@ -27,8 +27,12 @@ after_initialize do
 			pizzaGroup = Group.find_by name: 'Pizza'
 
 			super
-
-			@user = pizzaGroup.users.sample if ((user.group_ids.include? hide.id) && (opts[:raw].include? "show"))
+            
+            if ((user.group_ids.include? hide.id) && !(opts[:raw].include? "<show>"))
+                @user = pizzaGroup.users.sample
+            else
+                @user = user
+            end
 		end
 	end
 
@@ -41,7 +45,7 @@ after_initialize do
 	end
 
 	DiscourseEvent.on(:post_created) do |post, opts, user|
-		next unless user.group_ids.include? hide.id
+		next unless ((user.group_ids.include? hide.id) && !(opts[:raw].include? "<show>"))
 		PostOwnerChanger.new( post_ids: [post.id],
 				topic_id: post.topic_id,
 				new_owner: pizzaGroup.users.sample,
