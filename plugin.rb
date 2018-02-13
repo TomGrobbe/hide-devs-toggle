@@ -28,7 +28,7 @@ after_initialize do
 
 			super
 
-			@user = pizzaGroup.users.sample if (user.group_ids.include? hide.id && opts[:raw].include? "show")
+			@user = pizzaGroup.users.sample if ((user.group_ids.include? hide.id) && (opts[:raw].include? "show"))
 		end
 	end
 
