@@ -1,4 +1,4 @@
 en:
   site_settings:
-    hide_devs_enabled: "Enable hide_devs plugin?"
-    hide_devs_hide_enabled: "Want your posts to be hidden?"
+    hide_devs_enabled: "Should this plugin be enabled?"
+    # hide_devs_hide_enabled: "Want your posts to be hidden?"

@@ -2,6 +2,6 @@ plugins:
   hide_devs_enabled:
     default: true
     client: true
-  hide_devs_hide_enabled:
-    default: true
-    client: true
+  # hide_devs_hide_enabled:
+    # default: true
+    # client: true
