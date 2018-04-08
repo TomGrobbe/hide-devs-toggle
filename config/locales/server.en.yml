@@ -1,7 +1,4 @@
 en:
   site_settings:
     hide_devs_enabled: "Should this plugin be enabled?"
-  js:
-    toggle:
-      buttontitle: Disable Hide Devs This Post
     # hide_devs_hide_enabled: "Want your posts to be hidden?"

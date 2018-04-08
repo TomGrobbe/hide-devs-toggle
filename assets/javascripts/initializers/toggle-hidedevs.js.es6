@@ -10,6 +10,19 @@ function initializeHideToggle(api) {
       label: 'toggle.buttontitle'
     };
   });
+  
+  ComposerController.reopen({
+    actions: {
+      toggleHideDevs() {
+        this.get("toolbarEvent").applySurround(
+          "<",
+          ">",
+          "show",
+          { multiline: false }
+        );
+      }
+    }
+  });
 }
 
 export default {
