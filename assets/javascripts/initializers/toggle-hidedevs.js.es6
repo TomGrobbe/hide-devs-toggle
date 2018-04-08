@@ -40,6 +40,10 @@ function initializeHideToggle(api) {
         if (!hide) {
           this.get("toolbarEvent").addText("<show>\n");
         }else{
+          this.get("toolbarEvent").replaceText("<show>\n", "");
+          this.get("toolbarEvent").replaceText("<show>\r\n", "");
+          this.get("toolbarEvent").replaceText("<show>\r", "");
+          this.get("toolbarEvent").replaceText("<show>\n\r", "");
           this.get("toolbarEvent").replaceText("<show>", "");
         }
       }
