@@ -2,13 +2,16 @@
 import { withPluginApi, decorateCooked } from 'discourse/lib/plugin-api';
 import ComposerController from 'discourse/controllers/composer';
 
+var hide = false;
+
 function initializeHideToggle(api) {
   var usr = Discourse.User.findByUsername(Discourse.User.current().username);
   setTimeout(function(){
     if (usr != undefined){
-      console.log(usr);
+      // console.log(usr);
       var groupHide = usr._result.groups.find((g) => g.name == "hide");
       if (groupHide != undefined) {
+          hide = true;
         api.addToolbarPopupMenuOptionsCallback(() => {
           return {
             action: 'toggleHideDevs',
@@ -17,27 +20,20 @@ function initializeHideToggle(api) {
           };
         });
       }
-    }else{
-        console.log("undefined usr var.");
     }
-  }, 1000);
+  }, 250);
   
   
   
   ComposerController.reopen({
     actions: {
       toggleHideDevs() {
-        this.get("toolbarEvent").addText("<show>\n");
-        // if ()
-        // Discourse.User.current().groups.forEach((g) => { console.log(g.name); });
-        
-        this.get("toolbarEvent").applySurround(
-          "<",
-          ">",
-          "show",
-          { multiline: false }
-        );
-        
+        if (hide) {
+          this.get("toolbarEvent").addText("<show>\n");
+        }else{
+          this.get("toolbarEvent").removeText("<show>");
+        }
+        hide = !hide;
       }
     }
   });
