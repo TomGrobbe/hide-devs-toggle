@@ -22,7 +22,7 @@ function initializeHideToggle(api) {
     actions: {
       toggleHideDevs() {
         this.get("toolbarEvent").addText("<show>\n");
-        if ()
+        // if ()
         // Discourse.User.current().groups.forEach((g) => { console.log(g.name); });
         
         this.get("toolbarEvent").applySurround(
