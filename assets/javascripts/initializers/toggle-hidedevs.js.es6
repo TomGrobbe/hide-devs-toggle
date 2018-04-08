@@ -3,22 +3,24 @@ import { withPluginApi, decorateCooked } from 'discourse/lib/plugin-api';
 import ComposerController from 'discourse/controllers/composer';
 
 function initializeHideToggle(api) {
-
-  // Discourse.User.current().groups.forEach((g) => { console.log(g.name); });
-  // currentUser().groups.forEach((g) => { console.log(g.name); });
   var usr = Discourse.User.findByUsername(Discourse.User.current().username);
   setTimeout(function(){
-    var groupHide = usr._result.groups.find((g) => g.name == "hide");
-    if (groupHide != undefined) {
-      api.addToolbarPopupMenuOptionsCallback(() => {
-        return {
-          action: 'toggleHideDevs',
-          icon: 'magic',
-          label: 'toggle.buttontitle'
-        };
-      });
+    if (usr != undefined){
+      console.log(usr);
+      var groupHide = usr._result.groups.find((g) => g.name == "hide");
+      if (groupHide != undefined) {
+        api.addToolbarPopupMenuOptionsCallback(() => {
+          return {
+            action: 'toggleHideDevs',
+            icon: 'magic',
+            label: 'toggle.buttontitle'
+          };
+        });
+      }
+    }else{
+        console.log("undefined usr var.");
     }
-  }, 100);
+  }, 1000);
   
   
   
