@@ -36,12 +36,12 @@ function initializeHideToggle(api) {
   ComposerController.reopen({
     actions: {
       toggleHideDevs() {
-        if (hide) {
+        hide = !hide;
+        if (!hide) {
           this.get("toolbarEvent").addText("<show>\n");
         }else{
-          this.get("toolbarEvent").removeText("<show>");
+          this.get("toolbarEvent").replaceText("<show>", "");
         }
-        hide = !hide;
       }
     }
   });
