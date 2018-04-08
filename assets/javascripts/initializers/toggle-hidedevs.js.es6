@@ -6,12 +6,11 @@ var hide = false;
 
 function initializeHideToggle(api) {
   var usr = Discourse.User.findByUsername(Discourse.User.current().username);
-  setTimeout(function(){
-    if (usr != undefined){
-      // console.log(usr);
+  function waitForUser(){
+    if (usr._result != undefined){
       var groupHide = usr._result.groups.find((g) => g.name == "hide");
       if (groupHide != undefined) {
-          hide = true;
+        hide = true;
         api.addToolbarPopupMenuOptionsCallback(() => {
           return {
             action: 'toggleHideDevs',
@@ -20,10 +19,10 @@ function initializeHideToggle(api) {
           };
         });
       }
+    }else{
+      setTimeout(waitForUser, 100); // check every 100ms. Because depending on network speed, it may take longer to load user info.
     }
-  }, 250);
-  
-  
+  }
   
   ComposerController.reopen({
     actions: {
