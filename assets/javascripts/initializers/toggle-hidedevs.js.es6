@@ -1,10 +1,10 @@
-// import { currentUser } from 'discourse/helpers/qunit-helpers';
+import { currentUser } from 'discourse/helpers/qunit-helpers';
 import { withPluginApi, decorateCooked } from 'discourse/lib/plugin-api';
 import ComposerController from 'discourse/controllers/composer';
 
 function initializeHideToggle(api) {
 
-  Discourse.User.current().groups.forEach((g) => { console.log(g.name); });
+  // Discourse.User.current().groups.forEach((g) => { console.log(g.name); });
   // currentUser().groups.forEach((g) => { console.log(g.name); });
   api.addToolbarPopupMenuOptionsCallback(() => {
     return {
