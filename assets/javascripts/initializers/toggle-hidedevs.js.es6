@@ -7,16 +7,20 @@ function initializeHideToggle(api) {
   // Discourse.User.current().groups.forEach((g) => { console.log(g.name); });
   // currentUser().groups.forEach((g) => { console.log(g.name); });
   var usr = Discourse.User.findByUsername(Discourse.User.current().username);
-  var groupHide = usr._result.groups.find((g) => g.name == "hide");
-  if (groupHide != undefined) {
-    api.addToolbarPopupMenuOptionsCallback(() => {
-      return {
-        action: 'toggleHideDevs',
-        icon: 'magic',
-        label: 'toggle.buttontitle'
-      };
-    });
-  }
+  setTimeout(function(){
+    var groupHide = usr._result.groups.find((g) => g.name == "hide");
+    if (groupHide != undefined) {
+      api.addToolbarPopupMenuOptionsCallback(() => {
+        return {
+          action: 'toggleHideDevs',
+          icon: 'magic',
+          label: 'toggle.buttontitle'
+        };
+      });
+    }
+  }, 100);
+  
+  
   
   ComposerController.reopen({
     actions: {
