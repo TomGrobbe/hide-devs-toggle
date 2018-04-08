@@ -3,6 +3,7 @@ import { withPluginApi, decorateCooked } from 'discourse/lib/plugin-api';
 import ComposerController from 'discourse/controllers/composer';
 
 var hide = false;
+var stop = false;
 
 function initializeHideToggle(api) {
   var usr = Discourse.User.findByUsername(Discourse.User.current().username);
@@ -21,26 +22,29 @@ function initializeHideToggle(api) {
               label: 'toggle.buttontitle'
             };
           });
-          
-          ComposerController.reopen({
-            actions: {
-              toggleHideDevs() {
-                if (hide) {
-                  this.get("toolbarEvent").addText("<show>\n");
-                }else{
-                  this.get("toolbarEvent").removeText("<show>");
-                }
-                hide = !hide;
-              }
-            }
-          });
         }
-        return;
+        stop = true;
+        // return false;
       }
     }
     // console.log("Waiting...");
-    setTimeout(waitForUser, 300); // check every 300ms. Because depending on network speed, it may take longer to load user info.
+    if (!stop){
+      setTimeout(waitForUser, 300); // check every 300ms. Because depending on network speed, it may take longer to load user info.
+    }
   })();
+  
+  ComposerController.reopen({
+    actions: {
+      toggleHideDevs() {
+        if (hide) {
+          this.get("toolbarEvent").addText("<show>\n");
+        }else{
+          this.get("toolbarEvent").removeText("<show>");
+        }
+        hide = !hide;
+      }
+    }
+  });
 }
 
 export default {
