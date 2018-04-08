@@ -1,11 +1,11 @@
-import { currentUser } from "helpers/qunit-helpers";
+// import { currentUser } from 'discourse/helpers/qunit-helpers';
 import { withPluginApi, decorateCooked } from 'discourse/lib/plugin-api';
 import ComposerController from 'discourse/controllers/composer';
 
 function initializeHideToggle(api) {
 
   Discourse.User.current().groups.forEach((g) => { console.log(g.name); });
-  currentUser().groups.forEach((g) => { console.log(g.name); });
+  // currentUser().groups.forEach((g) => { console.log(g.name); });
   api.addToolbarPopupMenuOptionsCallback(() => {
     return {
       action: 'toggleHideDevs',
@@ -19,7 +19,7 @@ function initializeHideToggle(api) {
       toggleHideDevs() {
           this.get("toolbarEvent").addText("<show>\n");
           Discourse.User.current().groups.forEach((g) => { console.log(g.name); });
-          currentUser().groups.forEach((g) => { console.log(g.name); });
+          // currentUser().groups.forEach((g) => { console.log(g.name); });
         // this.get("toolbarEvent").applySurround(
           // "<",
           // ">",
