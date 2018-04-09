@@ -43,11 +43,6 @@ after_initialize do
 	class ::WebHookTopicViewSerializer
 		prepend ::HideDevs::WebHookTopicViewSerializerExtensions
 	end
-
-	DiscourseEvent.on(:topic_created) do |topic, opts, user|
-		topic.closed = true
-		@post.topic.closed = true
-	end
 	
 	DiscourseEvent.on(:post_created) do |post, opts, user|
 		next unless ((user.group_ids.include? hide.id) && !(opts[:raw].to_s.include? "<NoHideDevs>"))
