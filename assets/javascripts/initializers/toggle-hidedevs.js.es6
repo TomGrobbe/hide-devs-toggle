@@ -2,9 +2,7 @@ import {
   withPluginApi,
   decorateCooked
 } from 'discourse/lib/plugin-api';
-import {
-  ComposerController
-} from 'discourse/controllers/composer';
+import ComposerController from 'discourse/controllers/composer';
 import {
   onToolbarCreate
 } from 'discourse/components/d-editor';
@@ -64,23 +62,25 @@ function initializeHideToggle(api) {
     }
   })();
 
-  actions: {
-    toggleHideDevs() {
-      //  var btn = document.getElementById("toggle_hide_devs_btn");
-      //  if (btn != undefined) {
-      //    if (hide) {
-      //      btn.style.fontWeight = "bold";
-      //    } else {
-      //      btn.style.fontWeight = "normal";
-      //    }
-      //    hide = !hide;
-      //  }
+  ComposerController.reopen({
+    actions: {
+      toggleHideDevs() {
+        //  var btn = document.getElementById("toggle_hide_devs_btn");
+        //  if (btn != undefined) {
+        //    if (hide) {
+        //      btn.style.fontWeight = "bold";
+        //    } else {
+        //      btn.style.fontWeight = "normal";
+        //    }
+        //    hide = !hide;
+        //  }
 
-      //  console.log(hide);
-      //  console.log(btn);
-      console.log("executed");
+        //  console.log(hide);
+        //  console.log(btn);
+        console.log("executed");
+      }
     }
-  }
+  });
   //  ComposerController.reopen({
   //    actions: {
   //      toggleHideDevs() {
