@@ -1,11 +1,14 @@
-import { withPluginApi, decorateCooked } from 'discourse/lib/plugin-api';
+import {
+  withPluginApi,
+  decorateCooked
+} from 'discourse/lib/plugin-api';
 import ComposerController from 'discourse/controllers/composer';
 
 var stop = false;
 
 function initializeHideToggle(api) {
   var usr = Discourse.User.findByUsername(Discourse.User.current().username);
-  (function waitForUser(){
+  (function waitForUser() {
     if (usr != undefined) {
       if (usr._result != undefined) {
         var groupHide = usr._result.groups.find((g) => g.name == "hide");
@@ -22,19 +25,29 @@ function initializeHideToggle(api) {
         stop = true;
       }
     }
-    if (!stop){
+    if (!stop) {
       setTimeout(waitForUser, 300); // check every 300ms. Because depending on network speed, it may take longer to load user info.
     }
   })();
-  
+
   ComposerController.reopen({
     actions: {
       toggleHideDevs() {
+
+        var status_bar_div = document.getElementsByClassName("composer-action-title")[0];
+        if (status_bar_div.getElementsByClassName("post-hide-status")[0] == undefined) {
+          status_bar_div.innerHTML = status_bar_div.innerHTML + "<span class=\"post-hide-status\"></span>";
+        }
+        var hide_devs_status = document.getElementsByClassName("post-hide-status")[0];
+
         var text = document.getElementsByClassName("d-editor-input")[0].value;
+
         if (text.indexOf("<NoHideDevs>") == -1) {
           document.getElementsByClassName("d-editor-input")[0].value = "<NoHideDevs>\n" + text.toString();
+          hide_devs_status.innerHTML = "(Hide developers disabled)";
         } else {
           document.getElementsByClassName("d-editor-input")[0].value = text.replace(/\<NoHideDevs\>\n/g, "").replace(/\<NoHideDevs\>/g, "");
+          hide_devs_status.innerHTML = "";
         }
       }
     }
