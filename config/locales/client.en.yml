@@ -1,4 +1,6 @@
 en:
-  js:
-    toggle:
-      buttontitle: "Toggle Hide Devs"
+#  js:
+#    toggle:
+#      buttontitle: "Toggle Hide Devs"
+  composer:
+    oggle_hide_devs_btn_title: "Toggle Hide Devs"
