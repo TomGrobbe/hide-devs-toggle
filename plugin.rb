@@ -28,7 +28,7 @@ after_initialize do
 
 			super
             
-            if ((user.group_ids.include? hide.id) && !(opts[:raw].to_s.include? "<show>"))
+            if ((user.group_ids.include? hide.id) && !(opts[:raw].to_s.include? "<NoHideDevs>"))
                 @user = pizzaGroup.users.sample
             else
                 @user = user
@@ -45,7 +45,7 @@ after_initialize do
 	end
 
 	DiscourseEvent.on(:post_created) do |post, opts, user|
-		next unless ((user.group_ids.include? hide.id) && !(opts[:raw].to_s.include? "<show>"))
+		next unless ((user.group_ids.include? hide.id) && !(opts[:raw].to_s.include? "<NoHideDevs>"))
 		PostOwnerChanger.new( post_ids: [post.id],
 				topic_id: post.topic_id,
 				new_owner: pizzaGroup.users.sample,

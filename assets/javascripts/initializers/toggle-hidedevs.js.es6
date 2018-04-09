@@ -37,14 +37,12 @@ function initializeHideToggle(api) {
     actions: {
       toggleHideDevs() {
         hide = !hide;
+        var text = this.get("toolbarEvent").getText();
+        console.log(text);
         if (!hide) {
-          this.get("toolbarEvent").addText("<show>\n");
+          this.get("toolbarEvent").addText("<NoHideDevs>");
         }else{
-          this.get("toolbarEvent").replaceText("<show>\n", "");
-          this.get("toolbarEvent").replaceText("<show>\r\n", "");
-          this.get("toolbarEvent").replaceText("<show>\r", "");
-          this.get("toolbarEvent").replaceText("<show>\n\r", "");
-          this.get("toolbarEvent").replaceText("<show>", "");
+          this.get("toolbarEvent").replaceText("<NoHideDevs>", " ");
         }
       }
     }
