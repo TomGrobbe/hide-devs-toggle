@@ -65,7 +65,7 @@ function initializeHideToggle(api) {
   })();
 
   actions: {
-    toggleHideDevs(test) {
+    toggleHideDevs() {
       //  var btn = document.getElementById("toggle_hide_devs_btn");
       //  if (btn != undefined) {
       //    if (hide) {
@@ -79,7 +79,6 @@ function initializeHideToggle(api) {
       //  console.log(hide);
       //  console.log(btn);
       console.log("executed");
-      console.log(test);
     }
   }
   //  ComposerController.reopen({
