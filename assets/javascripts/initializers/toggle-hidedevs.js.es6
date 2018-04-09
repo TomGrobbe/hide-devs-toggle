@@ -15,11 +15,15 @@ var hide = true;
 
 function toggleHideDevs() {
   var btn = document.getElementById("toggle_hide_devs_btn");
-  if (hide) {
-    btn.style.fontWeight = "bold";
-  } else {
-    btn.style.fontWeight = "normal";
+  if (btn != undefined) {
+    if (hide) {
+      btn.style.fontWeight = "bold";
+    } else {
+      btn.style.fontWeight = "normal";
+    }
+    hide = !hide;
   }
+
   console.log(hide);
   console.log(btn);
 }
