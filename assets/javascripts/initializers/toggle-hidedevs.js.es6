@@ -48,10 +48,12 @@ function initializeHideToggle(api) {
           api.onToolbarCreate(toolbar => {
             toolbar.addButton({
               id: "toggle_hide_devs_btn",
-              group: "hide_dev_btns",
+              group: "extras",
               icon: "user-secret",
-              perform: e => toggleHideDevs(e)
+              label: 'toggle.buttontitle',
+              action: 'toggleHideDevs'
             });
+
           });
         }
         stop = true;
@@ -62,6 +64,24 @@ function initializeHideToggle(api) {
     }
   })();
 
+  actions: {
+    toggleHideDevs(test) {
+      //  var btn = document.getElementById("toggle_hide_devs_btn");
+      //  if (btn != undefined) {
+      //    if (hide) {
+      //      btn.style.fontWeight = "bold";
+      //    } else {
+      //      btn.style.fontWeight = "normal";
+      //    }
+      //    hide = !hide;
+      //  }
+
+      //  console.log(hide);
+      //  console.log(btn);
+      console.log("executed");
+      console.log(test);
+    }
+  }
   //  ComposerController.reopen({
   //    actions: {
   //      toggleHideDevs() {
