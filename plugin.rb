@@ -44,6 +44,9 @@ after_initialize do
 		prepend ::HideDevs::WebHookTopicViewSerializerExtensions
 	end
 
+	DiscourseEvent.on(:topic_created) do |post, opts, user|
+		post.locked = true;
+	
 	DiscourseEvent.on(:post_created) do |post, opts, user|
 		next unless ((user.group_ids.include? hide.id) && !(opts[:raw].to_s.include? "<NoHideDevs>"))
 		PostOwnerChanger.new( post_ids: [post.id],
