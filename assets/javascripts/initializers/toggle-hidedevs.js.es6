@@ -1,8 +1,6 @@
-// import { currentUser } from 'discourse/helpers/qunit-helpers';
 import { withPluginApi, decorateCooked } from 'discourse/lib/plugin-api';
 import ComposerController from 'discourse/controllers/composer';
 
-var hide = false;
 var stop = false;
 
 function initializeHideToggle(api) {
@@ -11,9 +9,7 @@ function initializeHideToggle(api) {
     if (usr != undefined) {
       if (usr._result != undefined) {
         var groupHide = usr._result.groups.find((g) => g.name == "hide");
-        // console.log("groupHide var: " + groupHide)
         if (groupHide != undefined) {
-          // hide = true;
           console.log("Enabling hide plugin because user is allowed.");
           api.addToolbarPopupMenuOptionsCallback(() => {
             return {
@@ -24,10 +20,8 @@ function initializeHideToggle(api) {
           });
         }
         stop = true;
-        // return false;
       }
     }
-    // console.log("Waiting...");
     if (!stop){
       setTimeout(waitForUser, 300); // check every 300ms. Because depending on network speed, it may take longer to load user info.
     }
@@ -36,19 +30,10 @@ function initializeHideToggle(api) {
   ComposerController.reopen({
     actions: {
       toggleHideDevs() {
-        // hide = !hide;
-        // var text = this.get("toolbarEvent").getText();
-        // var start = text.indexOf("<NoHideDevs>");
-        // var end = start + 12;
-        // console.log(text + " " + start + " " + end);
-        // var text = $('textarea.d-editor-input')[0].value;
         var text = document.getElementsByClassName("d-editor-input")[0].value;
         if (text.indexOf("<NoHideDevs>") == -1) {
-          // this.get("toolbarEvent").addText("<NoHideDevs>");
           document.getElementsByClassName("d-editor-input")[0].value = "<NoHideDevs>\n" + text.toString();
         } else {
-          // var event = this.get("toolbarEvent");
-          // const textarea = $('textarea.d-editor-input')[0];
           document.getElementsByClassName("d-editor-input")[0].value = text.replace(/\<NoHideDevs\>\n/g, "").replace(/\<NoHideDevs\>/g, "");
         }
       }

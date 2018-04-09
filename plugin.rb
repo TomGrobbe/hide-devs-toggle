@@ -1,7 +1,7 @@
 # name: hide_devs
 # about: Hide pizza users, discourse plugin.
-# version: 0.1.06
-# authors: Tom Grobbe
+# version: 1.0.0
+# authors: CitizenFX Collective & Tom Grobbe
 # url: https://github.com/TomGrobbe/hide-devs-toggle
 
 enabled_site_setting :hide_devs_enabled
