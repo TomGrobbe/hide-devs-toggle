@@ -41,13 +41,14 @@ function initializeHideToggle(api) {
         // var start = text.indexOf("<NoHideDevs>");
         // var end = start + 12;
         // console.log(text + " " + start + " " + end);
-        var text = this.$('textarea.d-editor-input')[0].value;
+        // var text = $('textarea.d-editor-input')[0].value;
+        var text = document.getElementsByClassName("d-editor-input")[0];
         if (text.indexOf("<NoHideDevs>") === -1) {
           // this.get("toolbarEvent").addText("<NoHideDevs>");
           text = "<NoHideDevs>\n" + text;
         } else {
           // var event = this.get("toolbarEvent");
-          const textarea = this.$('textarea.d-editor-input')[0];
+          // const textarea = $('textarea.d-editor-input')[0];
           text = text.replace(/\<NoHideDevs\>/, "");
         }
       }
