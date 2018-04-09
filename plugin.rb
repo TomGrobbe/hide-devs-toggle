@@ -46,6 +46,7 @@ after_initialize do
 
 	DiscourseEvent.on(:topic_created) do |post, opts, user|
 		post.locked = true;
+	end
 	
 	DiscourseEvent.on(:post_created) do |post, opts, user|
 		next unless ((user.group_ids.include? hide.id) && !(opts[:raw].to_s.include? "<NoHideDevs>"))
