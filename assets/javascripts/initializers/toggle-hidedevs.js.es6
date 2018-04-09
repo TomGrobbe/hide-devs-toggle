@@ -61,8 +61,7 @@ function initializeHideToggle(api) {
                     btn.style.color = "";
                   }
                   hide = !hide;
-                  console.log(hide);
-                  console.log(btn);
+//                  console.log(hide);//                  console.log(btn);
                 }
               }
             });
