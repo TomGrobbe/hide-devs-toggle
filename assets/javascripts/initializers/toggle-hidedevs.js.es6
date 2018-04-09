@@ -48,9 +48,18 @@ function initializeHideToggle(api) {
               id: "toggle_hide_devs_btn",
               group: "extras",
               icon: "user-secret",
-              label: 'toggle.buttontitle',
+              //              label: 'toggle.buttontitle',
               perform: function () {
                 console.log('executed');
+                var btn = document.getElementsByClassName("toggle_hide_devs_btn")[0];
+                if (btn != undefined && btn != null) {
+                  if (hide) {
+                    btn.style.backgroundColor = "rgb(221, 93, 93)";
+                  } else {
+                    btn.style.backgroundColor = "transparent";
+                  }
+                  hide = !hide;
+                }
               }
             });
           });
