@@ -3,4 +3,4 @@ en:
 #    toggle:
 #      buttontitle: "Toggle Hide Devs"
   composer:
-    oggle_hide_devs_btn_title: "Toggle Hide Devs"
+    toggle_hide_devs_btn_title: "Disable Hide Devs"
