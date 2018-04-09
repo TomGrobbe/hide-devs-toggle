@@ -123,11 +123,11 @@ function initializeHideToggle(api) {
 export default {
   name: "toggle-hidedevs",
   initialize(container) {
-    const siteSettings = container.lookup('site-settings:main');
-    if (siteSettings.hide_devs_enabled) {
-      withPluginApi('0.5', api => initializeHideToggle(api), {
-        noApi: () => priorToApi(container)
-      });
-    }
+    //    const siteSettings = container.lookup('site-settings:main');
+    //    if (siteSettings.hide_devs_enabled) {
+    withPluginApi('0.1', api => initializeHideToggle(api), {
+      noApi: () => priorToApi(container)
+    });
+    //    }
   }
 };
