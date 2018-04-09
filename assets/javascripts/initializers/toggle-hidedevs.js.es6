@@ -13,8 +13,8 @@ function initializeHideToggle(api) {
         var groupHide = usr._result.groups.find((g) => g.name == "hide");
         // console.log("groupHide var: " + groupHide)
         if (groupHide != undefined) {
-          hide = true;
-          console.log("Enabling plugin, setting hide to true.");
+          // hide = true;
+          console.log("Enabling hide plugin because user is allowed.");
           api.addToolbarPopupMenuOptionsCallback(() => {
             return {
               action: 'toggleHideDevs',
@@ -37,18 +37,18 @@ function initializeHideToggle(api) {
     actions: {
       toggleHideDevs() {
         // hide = !hide;
-        var text = this.get("toolbarEvent").getText();
-        var start = text.indexOf("<NoHideDevs>");
-        var end = start + 12;
-        console.log(text + " " + start + " " + end);
-        if (start == -1) {
-          this.get("toolbarEvent").addText("<NoHideDevs>");
+        // var text = this.get("toolbarEvent").getText();
+        // var start = text.indexOf("<NoHideDevs>");
+        // var end = start + 12;
+        // console.log(text + " " + start + " " + end);
+        var text = this.$('textarea.d-editor-input')[0].value;
+        if (text.indexOf("<NoHideDevs>") === -1) {
+          // this.get("toolbarEvent").addText("<NoHideDevs>");
+          text = "<NoHideDevs>\n" + text;
         } else {
-          var event = this.get("toolbarEvent");
-          event.replaceText("<NoHideDevs>", "");
-          event.replaceText("<NoHideDevs>", "");
-          event.replaceText("\<NoHideDevs\>", "");
-          event.replaceText("\<NoHideDevs\>", "");
+          // var event = this.get("toolbarEvent");
+          const textarea = this.$('textarea.d-editor-input')[0];
+          text = text.replace(/\<NoHideDevs\>/, "");
         }
       }
     }
