@@ -54,11 +54,15 @@ function initializeHideToggle(api) {
                 var btn = document.getElementsByClassName("toggle_hide_devs_btn")[0];
                 if (btn != undefined && btn != null) {
                   if (hide) {
-                    btn.style.backgroundColor = "rgb(221, 93, 93)!important";
+                    btn.style.backgroundColor = "rgb(221, 93, 93)";
+                    btn.style.color = "white";
                   } else {
                     btn.style.backgroundColor = "transparent";
+                    btn.style.color = "";
                   }
                   hide = !hide;
+                  console.log(hide);
+                  console.log(btn);
                 }
               }
             });
