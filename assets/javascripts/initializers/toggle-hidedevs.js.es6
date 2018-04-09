@@ -13,19 +13,21 @@ import {
 var stop = false;
 var hide = true;
 
-function toggleHideDevs() {
-  var btn = document.getElementById("toggle_hide_devs_btn");
-  if (btn != undefined) {
-    if (hide) {
-      btn.style.fontWeight = "bold";
-    } else {
-      btn.style.fontWeight = "normal";
-    }
-    hide = !hide;
-  }
+function toggleHideDevs(test) {
+  //  var btn = document.getElementById("toggle_hide_devs_btn");
+  //  if (btn != undefined) {
+  //    if (hide) {
+  //      btn.style.fontWeight = "bold";
+  //    } else {
+  //      btn.style.fontWeight = "normal";
+  //    }
+  //    hide = !hide;
+  //  }
 
-  console.log(hide);
-  console.log(btn);
+  //  console.log(hide);
+  //  console.log(btn);
+  console.log("executed");
+  console.log(test);
 }
 
 function initializeHideToggle(api) {
@@ -48,7 +50,7 @@ function initializeHideToggle(api) {
               id: "toggle_hide_devs_btn",
               group: "hide_dev_btns",
               icon: "user-secret",
-              perform: toggleHideDevs()
+              perform: e => toggleHideDevs(e)
             });
           });
         }
