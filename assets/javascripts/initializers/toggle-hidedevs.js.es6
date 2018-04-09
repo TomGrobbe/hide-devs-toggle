@@ -44,7 +44,7 @@ function initializeHideToggle(api) {
               id: "toggle_hide_devs_btn",
               group: "hide_dev_btns",
               icon: "user-secret",
-              action: "toggleHideDevs"
+              perform: toggleHideDevs()
             });
           });
         }
