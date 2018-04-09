@@ -36,13 +36,19 @@ function initializeHideToggle(api) {
   ComposerController.reopen({
     actions: {
       toggleHideDevs() {
-        hide = !hide;
+        // hide = !hide;
         var text = this.get("toolbarEvent").getText();
-        console.log(text);
-        if (!hide) {
+        var start = text.indexOf("<NoHideDevs>");
+        var end = start + 12;
+        console.log(text + " " + start + " " + end);
+        if (start == -1) {
           this.get("toolbarEvent").addText("<NoHideDevs>");
-        }else{
-          this.get("toolbarEvent").replaceText("<NoHideDevs>", " ");
+        } else {
+          var event = this.get("toolbarEvent");
+          event.replaceText("<NoHideDevs>", "");
+          event.replaceText("<NoHideDevs>", "");
+          event.replaceText("\<NoHideDevs\>", "");
+          event.replaceText("\<NoHideDevs\>", "");
         }
       }
     }
