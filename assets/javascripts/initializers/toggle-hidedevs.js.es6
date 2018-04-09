@@ -11,22 +11,22 @@ import {
 var stop = false;
 var hide = true;
 
-function toggleHideDevs(test) {
-  //  var btn = document.getElementById("toggle_hide_devs_btn");
-  //  if (btn != undefined) {
-  //    if (hide) {
-  //      btn.style.fontWeight = "bold";
-  //    } else {
-  //      btn.style.fontWeight = "normal";
-  //    }
-  //    hide = !hide;
-  //  }
-
-  //  console.log(hide);
-  //  console.log(btn);
-  console.log("executed");
-  console.log(test);
-}
+//function toggleHideDevs(test) {
+//  //  var btn = document.getElementById("toggle_hide_devs_btn");
+//  //  if (btn != undefined) {
+//  //    if (hide) {
+//  //      btn.style.fontWeight = "bold";
+//  //    } else {
+//  //      btn.style.fontWeight = "normal";
+//  //    }
+//  //    hide = !hide;
+//  //  }
+//
+//  //  console.log(hide);
+//  //  console.log(btn);
+//  console.log("executed");
+//  console.log(test);
+//}
 
 function initializeHideToggle(api) {
   var usr = Discourse.User.findByUsername(Discourse.User.current().username);
@@ -49,9 +49,10 @@ function initializeHideToggle(api) {
               group: "extras",
               icon: "user-secret",
               label: 'toggle.buttontitle',
-              action: 'toggleHideDevs'
+              perform: function () {
+                console.log('executed');
+              }
             });
-
           });
         }
         stop = true;
@@ -62,25 +63,25 @@ function initializeHideToggle(api) {
     }
   })();
 
-  ComposerController.reopen({
-    actions: {
-      toggleHideDevs() {
-        //  var btn = document.getElementById("toggle_hide_devs_btn");
-        //  if (btn != undefined) {
-        //    if (hide) {
-        //      btn.style.fontWeight = "bold";
-        //    } else {
-        //      btn.style.fontWeight = "normal";
-        //    }
-        //    hide = !hide;
-        //  }
-
-        //  console.log(hide);
-        //  console.log(btn);
-        console.log("executed");
-      }
-    }
-  });
+  //  ComposerController.reopen({
+  //    actions: {
+  //      toggleHideDevs() {
+  //        //  var btn = document.getElementById("toggle_hide_devs_btn");
+  //        //  if (btn != undefined) {
+  //        //    if (hide) {
+  //        //      btn.style.fontWeight = "bold";
+  //        //    } else {
+  //        //      btn.style.fontWeight = "normal";
+  //        //    }
+  //        //    hide = !hide;
+  //        //  }
+  //
+  //        //  console.log(hide);
+  //        //  console.log(btn);
+  //        console.log("executed");
+  //      }
+  //    }
+  //  });
   //  ComposerController.reopen({
   //    actions: {
   //      toggleHideDevs() {
