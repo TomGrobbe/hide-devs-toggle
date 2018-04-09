@@ -54,7 +54,7 @@ function initializeHideToggle(api) {
                 var btn = document.getElementsByClassName("toggle_hide_devs_btn")[0];
                 if (btn != undefined && btn != null) {
                   if (hide) {
-                    btn.style.backgroundColor = "rgb(221, 93, 93)";
+                    btn.style.backgroundColor = "rgb(221, 93, 93)!important";
                   } else {
                     btn.style.backgroundColor = "transparent";
                   }
