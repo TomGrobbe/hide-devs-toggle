@@ -42,7 +42,7 @@ function initializeHideToggle(api) {
         // var end = start + 12;
         // console.log(text + " " + start + " " + end);
         // var text = $('textarea.d-editor-input')[0].value;
-        var text = document.getElementsByClassName("d-editor-input")[0];
+        var text = document.getElementsByClassName("d-editor-input")[0].value;
         if (text.indexOf("<NoHideDevs>") === -1) {
           // this.get("toolbarEvent").addText("<NoHideDevs>");
           text = "<NoHideDevs>\n" + text;
