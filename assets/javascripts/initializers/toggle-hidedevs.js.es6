@@ -49,7 +49,7 @@ function initializeHideToggle(api) {
         } else {
           // var event = this.get("toolbarEvent");
           // const textarea = $('textarea.d-editor-input')[0];
-          document.getElementsByClassName("d-editor-input")[0].value = text.replace(/\<NoHideDevs\>/, "");
+          document.getElementsByClassName("d-editor-input")[0].value = text.replace(/\<NoHideDevs\>\n/g, "").replace(/\<NoHideDevs\>/g, "");
         }
       }
     }
