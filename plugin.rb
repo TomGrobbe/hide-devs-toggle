@@ -44,8 +44,9 @@ after_initialize do
 		prepend ::HideDevs::WebHookTopicViewSerializerExtensions
 	end
 
-	DiscourseEvent.on(:topic_created) do |post, opts, user|
-		post.locked = true;
+	DiscourseEvent.on(:topic_created) do |topic, opts, user|
+		topic.closed = true
+		@post.topic.closed = true
 	end
 	
 	DiscourseEvent.on(:post_created) do |post, opts, user|
