@@ -94,14 +94,14 @@ function initializeHideToggle(api) {
       //      }
       //      console.log("2:");
       //      console.log(this);
-      var btn = document.getElementsByClassName("toggle_hide_devs_btn")[0];
-      if (btn) {
+      var btn3 = document.getElementsByClassName("toggle_hide_devs_btn")[0];
+      if (btn3) {
         if (hide) {
-          btn.style.backgroundColor = "rgb(221, 93, 93)";
-          btn.style.color = "white";
+          btn3.style.backgroundColor = "rgb(221, 93, 93)";
+          btn3.style.color = "white";
         } else {
-          btn.style.backgroundColor = "transparent";
-          btn.style.color = "";
+          btn3.style.backgroundColor = "transparent";
+          btn3.style.color = "";
         }
       }
     },
