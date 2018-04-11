@@ -16,7 +16,7 @@ import {
 
 
 var stop = false;
-var hide = false;
+var hide = true;
 
 function initializeHideToggle(api) {
 
@@ -95,7 +95,7 @@ function initializeHideToggle(api) {
 export default {
   name: "toggle-hidedevs",
   initialize(container) {
-    Composer.serializeOnCreate('hide_devs');
+    Composer.serializeOnCreate('hide_devs', 'hide_devs');
     const siteSettings = container.lookup('site-settings:main');
     if (siteSettings.hide_devs_enabled) {
       withPluginApi('0.1', api => initializeHideToggle(api), {
