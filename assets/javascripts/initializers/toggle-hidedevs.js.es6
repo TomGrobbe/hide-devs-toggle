@@ -68,16 +68,16 @@ function initializeHideToggle(api) {
       setTimeout(waitForUser, 300); // check every 300ms. Because depending on network speed, it may take longer to load user info.
     }
   })();
-  api.includePostAttributes('hide_post');
+  api.includePostAttributes('hide_devs');
   api.modifyClass('model:composer', {
-    hide_post: hide,
+    hide_devs: hide,
 
     @on('init')
     @observes('post')
     setHide() {
       const post = this.get('post');
       //      if (post) {
-      this.set('hide_post', hide);
+      this.set('hide_devs', hide);
       console.log("hide_post is now set to: " + hide);
       //      } else {
       //        console.log("no post?! " + hide);
@@ -90,7 +90,7 @@ function initializeHideToggle(api) {
 export default {
   name: "toggle-hidedevs",
   initialize(container) {
-    Composer.serializeOnCreate('hide_post');
+    Composer.serializeOnCreate('hide_devs');
     const siteSettings = container.lookup('site-settings:main');
     if (siteSettings.hide_devs_enabled) {
       withPluginApi('0.1', api => initializeHideToggle(api), {
