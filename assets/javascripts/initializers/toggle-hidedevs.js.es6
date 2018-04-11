@@ -1,200 +1,101 @@
 import {
-	withPluginApi,
-	decorateCooked
+  withPluginApi,
+  decorateCooked
 } from 'discourse/lib/plugin-api';
 import ComposerController from 'discourse/controllers/composer';
 import {
-	onToolbarCreate
+  onToolbarCreate
 } from 'discourse/components/d-editor';
 import Composer from 'discourse/models/composer';
 import {
-	default as computed,
-	on,
-	observes
+  default as computed,
+  on,
+  observes
 } from 'ember-addons/ember-computed-decorators';
 
 
 
 var stop = false;
-var hide = false;
-
-//function toggleHideDevs(test) {
-//  //  var btn = document.getElementById("toggle_hide_devs_btn");
-//  //  if (btn != undefined) {
-//  //    if (hide) {
-//  //      btn.style.fontWeight = "bold";
-//  //    } else {
-//  //      btn.style.fontWeight = "normal";
-//  //    }
-//  //    hide = !hide;
-//  //  }
-//
-//  //  console.log(hide);
-//  //  console.log(btn);
-//  console.log("executed");
-//  console.log(test);
-//}
+var hide = true;
 
 function initializeHideToggle(api) {
-	var usr = Discourse.User.findByUsername(Discourse.User.current().username);
-	(function waitForUser() {
-		if (usr != undefined) {
-			if (usr._result != undefined) {
-				var groupHide = usr._result.groups.find((g) => g.name == "hide");
-				if (groupHide != undefined) {
-					console.log("Enabling hide plugin because user is allowed.");
-					//          api.addToolbarPopupMenuOptionsCallback(() => {
-					//            return {
-					//              action: 'toggleHideDevs',
-					//              icon: 'user-secret',
-					//              label: 'toggle.buttontitle'
-					//            };
-					//          });
-					api.onToolbarCreate(toolbar => {
-						toolbar.addButton({
-							id: "toggle_hide_devs_btn",
-							group: "extras",
-							icon: "user-secret",
-							//              label: 'toggle.buttontitle',
-							perform: function () {
-								console.log('before change: ' + hide);
-								var btn = document.getElementsByClassName("toggle_hide_devs_btn")[0];
-								if (btn != undefined && btn != null) {
-									if (hide) {
-										btn.style.backgroundColor = "rgb(221, 93, 93)";
-										btn.style.color = "white";
-									} else {
-										btn.style.backgroundColor = "transparent";
-										btn.style.color = "";
-									}
-									hide = !hide;
-									console.log('after change: ' + hide);
-									console.log(this);
-									//                  console.log(hide);//                  console.log(btn);
-								}
-							}
-						});
-					});
-				}
-				stop = true;
-			}
-		}
-		if (!stop) {
-			setTimeout(waitForUser, 300); // check every 300ms. Because depending on network speed, it may take longer to load user info.
-		}
-	})();
 
-	//  ComposerController.reopen({
-	//    actions: {
-	//      toggleHideDevs() {
-	//        //  var btn = document.getElementById("toggle_hide_devs_btn");
-	//        //  if (btn != undefined) {
-	//        //    if (hide) {
-	//        //      btn.style.fontWeight = "bold";
-	//        //    } else {
-	//        //      btn.style.fontWeight = "normal";
-	//        //    }
-	//        //    hide = !hide;
-	//        //  }
-	//
-	//        //  console.log(hide);
-	//        //  console.log(btn);
-	//        console.log("executed");
-	//      }
-	//    }
-	//  });
-	//  ComposerController.reopen({
-	//    actions: {
-	//      toggleHideDevs() {
-	//        var btn = document.getElementById("toggle_hide_devs_btn");
-	//        if (hide) {
-	//          btn.style.fontWeight = "bold";
-	//        } else {
-	//          btn.style.fontWeight = "normal";
-	//        }
-	//        console.log(hide);
-	//        console.log(btn);
-	//
-	//        /*
-	//        var status_bar_div = document.getElementsByClassName("composer-action-title")[0];
-	//        var text = document.getElementsByClassName("d-editor-input")[0].value;
-	//        if (status_bar_div.getElementsByClassName("post-hide-status")[0] == undefined) {
-	//          //          if (text.indexOf("<NoHideDevs>") == -1) {
-	//          //            status_bar_div.innerHTML = status_bar_div.innerHTML + "<span class=\"post-hide-status\"></span>";
-	//          //          } else {
-	//          status_bar_div.innerHTML = status_bar_div.innerHTML + "<span class=\"post-hide-status\">(Hide developers disabled)</span>";
-	//          //          }
-	//        }
-	//        var hide_devs_status = document.getElementsByClassName("post-hide-status")[0];
-	//
-	//        if (text.indexOf("<NoHideDevs>") == -1) {
-	//          hide_devs_status.style.visibility = "hidden";
-	//        }
-	//
-	//        if (text.indexOf("<NoHideDevs>") == -1) {
-	//          document.getElementsByClassName("d-editor-input")[0].value = "<NoHideDevs>\n" + text.toString();
-	//          //          hide_devs_status.innerHTML = "(Hide developers disabled)";
-	//          hide_devs_status.style.visibility = "visible";
-	//        } else {
-	//          document.getElementsByClassName("d-editor-input")[0].value = text.replace(/\<NoHideDevs\>\n/g, "").replace(/\<NoHideDevs\>/g, "");
-	//          //          hide_devs_status.innerHTML = "";
-	//          hide_devs_status.style.visibility = "hidden";
-	//        }
-	//        */
-	//      }
-	//    }
-	//  });
+  var usr = Discourse.User.findByUsername(Discourse.User.current().username);
+  (function waitForUser() {
+    if (usr != undefined) {
+      if (usr._result != undefined) {
+        var groupHide = usr._result.groups.find((g) => g.name == "hide");
+        if (groupHide != undefined) {
+          console.log("Enabling hide plugin because user is allowed.");
 
-	//  var status_bar_div = document.getElementsByClassName("composer-action-title")[0];
-	//  var text = document.getElementsByClassName("d-editor-input")[0].value;
-	//  if (status_bar_div.getElementsByClassName("post-hide-status")[0] == undefined) {
-	//    //          if (text.indexOf("<NoHideDevs>") == -1) {
-	//    //            status_bar_div.innerHTML = status_bar_div.innerHTML + "<span class=\"post-hide-status\"></span>";
-	//    //          } else {
-	//    status_bar_div.innerHTML = status_bar_div.innerHTML + "<span class=\"post-hide-status\">(Hide developers disabled)</span>";
-	//    //          }
-	//  }
-	//  var hide_devs_status = document.getElementsByClassName("post-hide-status")[0];
-	//
-	//  if (text.indexOf("<NoHideDevs>") == -1) {
-	//    hide_devs_status.style.visibility = "hidden";
-	//  }
+          var btn = document.getElementsByClassName("toggle_hide_devs_btn")[0];
+          if (btn) {
+            if (hide) {
+              btn.style.backgroundColor = "rgb(221, 93, 93)";
+              btn.style.color = "white";
+            } else {
+              btn.style.backgroundColor = "transparent";
+              btn.style.color = "";
+            }
+          }
+          api.onToolbarCreate(toolbar => {
+            toolbar.addButton({
+              id: "toggle_hide_devs_btn",
+              group: "extras",
+              icon: "user-secret",
+              perform: function () {
+                console.log('before change: ' + hide);
+                var btn = document.getElementsByClassName("toggle_hide_devs_btn")[0];
+                if (btn != undefined && btn != null) {
+                  if (hide) {
+                    btn.style.backgroundColor = "rgb(221, 93, 93)";
+                    btn.style.color = "white";
+                  } else {
+                    btn.style.backgroundColor = "transparent";
+                    btn.style.color = "";
+                  }
+                  hide = !hide;
+                  console.log('after change: ' + hide);
+                }
+              }
+            });
+          });
+        }
+        stop = true;
+      }
+    }
+    if (!stop) {
+      setTimeout(waitForUser, 300); // check every 300ms. Because depending on network speed, it may take longer to load user info.
+    }
+  })();
+  api.includePostAttributes('hide_post');
+  api.modifyClass('model:composer', {
+    hide_post: hide,
+
+    @on('init')
+    @observes('post')
+    setHide() {
+      const post = this.get('post');
+      if (post) {
+        this.set('hide_post', hide);
+        console.log("hide_post is now set to: " + hide);
+      } else {
+        console.log("no post?! " + hide);
+      }
+      console.log(this);
+    },
+  });
 }
 
 export default {
-	name: "toggle-hidedevs",
-	initialize(container) {
-		Composer.serializeOnCreate('hide_post');
-		withPluginApi('0.8.10', api => {
-			api.includePostAttributes('hide_post');
-			api.modifyClass('model:composer', {
-				hide_post: true,
-
-				@on('init')
-				@observes('post')
-				setHide() {
-					const post = this.get('post');
-					if (post) {
-						this.set('hide_post', hide);
-						console.log("hide_post is now set to: " + hide);
-					} else {
-						console.log("no post?! " + hide);
-					}
-					const draft = this.get('draft');
-					if (draft) {
-						this.set('hide_post', hide);
-						console.log("(draft) hide_post is now set to: " + hide);
-					} else {
-						console.log("no draft?! " + hide);
-					}
-				},
-			});
-		});
-		const siteSettings = container.lookup('site-settings:main');
-		if (siteSettings.hide_devs_enabled) {
-			withPluginApi('0.1', api => initializeHideToggle(api), {
-				noApi: () => priorToApi(container)
-			});
-		}
-	}
+  name: "toggle-hidedevs",
+  initialize(container) {
+    Composer.serializeOnCreate('hide_post');
+    const siteSettings = container.lookup('site-settings:main');
+    if (siteSettings.hide_devs_enabled) {
+      withPluginApi('0.1', api => initializeHideToggle(api), {
+        noApi: () => priorToApi(container)
+      });
+    }
+  }
 };
