@@ -102,7 +102,7 @@ export default {
 
         if (inHideGroup) {
           api.modifyClass('model:composer', {
-            hideDevs: false
+            hideDevs: true
           })
 
           api.onToolbarCreate(toolbar => {
@@ -118,6 +118,7 @@ export default {
             actions: {
               toggleHideDevs() {
                 this.toggleProperty('outletArgs.composer.hideDevs');
+                $("toggle-hide-devs-btn").toggleClass("dis");
               }
             }
           });
