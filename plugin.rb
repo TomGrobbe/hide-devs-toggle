@@ -8,11 +8,14 @@ enabled_site_setting :hide_devs_enabled
 
 require_dependency 'post_creator'
 require_dependency 'topic_creator'
+require_dependency 'plugin/metadata'
+
 
 after_initialize do
 
-	Post.register_custom_field_type('hide_devs', :boolean)
-	add_permitted_post_create_param('hide_devs')
+#	::Post.register_custom_field_type('hide_devs', :boolean)
+	register_post_custom_field_type('hide_devs', :boolean)
+#	add_permitted_post_create_param('hide_devs')
 	hide = Group.find_by name: 'hide'
 	pizzaGroup = Group.find_by name: 'Pizza'
 
