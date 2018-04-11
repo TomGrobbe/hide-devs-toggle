@@ -44,7 +44,6 @@ function initializeHideToggle(api) {
               group: "extras",
               icon: "user-secret",
               perform: function () {
-                console.log('before change: ' + hide);
                 var btn = document.getElementsByClassName("toggle_hide_devs_btn")[0];
                 if (btn != undefined && btn != null) {
                   if (hide) {
@@ -55,7 +54,7 @@ function initializeHideToggle(api) {
                     btn.style.color = "";
                   }
                   hide = !hide;
-                  console.log('after change: ' + hide);
+                  console.log('New state after button press: ' + hide);
                 }
               }
             });
@@ -68,26 +67,30 @@ function initializeHideToggle(api) {
       setTimeout(waitForUser, 300); // check every 300ms. Because depending on network speed, it may take longer to load user info.
     }
   })();
-  api.includePostAttributes('hide_devs');
+  //  api.includePostAttributes('hide_devs');
+
   api.modifyClass('model:composer', {
     hide_devs: hide,
 
-    @on('init')
-    @observes('post')
+    //    @on('init')
+    //    @observes('post')
+    @observes('composeState')
     setHide() {
-      const post = this.get('post');
+      //      const post = this.get('post');
       //      if (post) {
 
-      console.log("1:");
-      console.log(this);
-      this.set('hide_devs', hide);
-      console.log("hide_post is now set to: " + hide);
-      console.log(this.get('hide_devs'));
+      //      console.log("1:");
+      //      console.log(this);
+      //      this.set('hide_devs', hide);
+      //      console.log("hide_post is now set to: " + hide);
+      //      console.log(this.get('hide_devs'));
       //      } else {
       //        console.log("no post?! " + hide);
       //      }
-      console.log("2:");
+      //      console.log("2:");
       console.log(this);
+      console.log(this.post.toString());
+      console.log(Discourse.User.Current());
     },
   });
 }
@@ -95,7 +98,7 @@ function initializeHideToggle(api) {
 export default {
   name: "toggle-hidedevs",
   initialize(container) {
-    Composer.serializeOnCreate('hide_devs', 'hide_devs');
+    //    Composer.serializeOnCreate('hide_devs', 'hide_devs');
     const siteSettings = container.lookup('site-settings:main');
     if (siteSettings.hide_devs_enabled) {
       withPluginApi('0.1', api => initializeHideToggle(api), {
