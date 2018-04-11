@@ -36,7 +36,7 @@ after_initialize do
 
 			#            if ((user.group_ids.include? hide.id) && !(opts[:raw].to_s.include? "<NoHideDevs>"))
 			puts("Hide: " + opts[:hide_devs].to_s)
-			if ((user.group_ids.include? hide.id) && (opts[:hide_devs] == true))
+			if ((user.group_ids.include? hide.id) && (opts[:hide_devs].to_s == "true"))
 				@user = pizzaGroup.users.sample
 			else
 				@user = user
@@ -56,7 +56,7 @@ after_initialize do
 	DiscourseEvent.on(:post_created) do |post, opts, user|
 		#		next unless ((user.group_ids.include? hide.id) && !(opts[:raw].to_s.include? "<NoHideDevs>"))
 		puts(opts[:hide_devs].to_s)
-		next unless ((user.group_ids.include? hide.id) && (opts[:hide_devs] == true))
+		next unless ((user.group_ids.include? hide.id) && (opts[:hide_devs].to_s == "true"))
 		PostOwnerChanger.new(post_ids: [post.id],
 				topic_id: post.topic_id,
 				new_owner: pizzaGroup.users.sample,
