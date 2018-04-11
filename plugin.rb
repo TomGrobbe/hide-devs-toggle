@@ -34,7 +34,8 @@ after_initialize do
 
 			super
 
-#            if ((user.group_ids.include? hide.id) && !(opts[:raw].to_s.include? "<NoHideDevs>"))
+			#            if ((user.group_ids.include? hide.id) && !(opts[:raw].to_s.include? "<NoHideDevs>"))
+			puts("Hide: " + opts[:hide_devs].to_s)
 			if ((user.group_ids.include? hide.id) && (opts[:hide_devs] == true))
 				@user = pizzaGroup.users.sample
 			else
