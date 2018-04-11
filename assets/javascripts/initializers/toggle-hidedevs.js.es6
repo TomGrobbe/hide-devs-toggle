@@ -57,7 +57,7 @@ function initializeHideToggle(api) {
               icon: "user-secret",
               //              label: 'toggle.buttontitle',
               perform: function () {
-                console.log('executed');
+                console.log('before change: ' + hide);
                 var btn = document.getElementsByClassName("toggle_hide_devs_btn")[0];
                 if (btn != undefined && btn != null) {
                   if (hide) {
@@ -68,6 +68,8 @@ function initializeHideToggle(api) {
                     btn.style.color = "";
                   }
                   hide = !hide;
+                  console.log('after change: ' + hide);
+                  console.log(this);
                   //                  console.log(hide);//                  console.log(btn);
                 }
               }
@@ -176,7 +178,14 @@ export default {
             this.set('hide_post', hide);
             console.log("hide_post is now set to: " + hide);
           } else {
-            console.log("no post?!");
+            console.log("no post?! " + hide);
+          }
+          const draft = this.get('draft');
+          if (draft) {
+            this.set('hide_post', hide);
+            console.log("(draft) hide_post is now set to: " + hide);
+          } else {
+            console.log("no draft?! " + hide);
           }
         },
       });
