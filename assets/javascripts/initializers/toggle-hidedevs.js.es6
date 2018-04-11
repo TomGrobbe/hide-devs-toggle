@@ -77,11 +77,16 @@ function initializeHideToggle(api) {
     setHide() {
       const post = this.get('post');
       //      if (post) {
+
+      console.log("1:");
+      console.log(this);
       this.set('hide_devs', hide);
       console.log("hide_post is now set to: " + hide);
+      console.log(this.get('hide_devs'));
       //      } else {
       //        console.log("no post?! " + hide);
       //      }
+      console.log("2:");
       console.log(this);
     },
   });
