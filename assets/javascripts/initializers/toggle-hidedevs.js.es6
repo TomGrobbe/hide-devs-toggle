@@ -27,7 +27,7 @@ function initializeHideToggle(api) {
         (function waitForUser() {
           if (usr != undefined) {
             if (usr._result != undefined) {
-              var groupHide = usr._result.groups.find((g) => g.name == "hide");
+              var groupHide = usr._result.groups.find((g) => g.name == "hide_devs");
               if (groupHide != undefined) {
                 console.log("Enabling hide plugin because user is allowed.");
 
@@ -83,12 +83,12 @@ function initializeHideToggle(api) {
     //    @observes('post')
     @observes('composeState')
     setHide() {
-      //      const post = this.get('post');
+      const post = this.get('post');
       //      if (post) {
 
       //      console.log("1:");
       //      console.log(this);
-      //      this.set('hide_devs', hide);
+      this.set('hide_devs', hide);
       //      console.log("hide_post is now set to: " + hide);
       //      console.log(this.get('hide_devs'));
       //      } else {
@@ -96,9 +96,6 @@ function initializeHideToggle(api) {
       //      }
       //      console.log("2:");
       console.log(this);
-      console.log(this.post);
-      console.log(Discourse.User.current());
-      console.log(Discourse.Groups)
     },
   });
 }
@@ -106,7 +103,7 @@ function initializeHideToggle(api) {
 export default {
   name: "toggle-hidedevs",
   initialize(container) {
-    //    Composer.serializeOnCreate('hide_devs', 'hide_devs');
+    Composer.serializeOnCreate('hide_devs', 'hide_devs');
     const siteSettings = container.lookup('site-settings:main');
     if (siteSettings.hide_devs_enabled) {
       withPluginApi('0.1', api => initializeHideToggle(api), {
