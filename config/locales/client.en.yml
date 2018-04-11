@@ -1,6 +1,3 @@
 en:
-  js:
-    composer:
-      toggle-hide-devs-btn_title: Disable Hide Devs
   composer:
     toggle-hide-devs-btn: Disable Hide Devs
