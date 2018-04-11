@@ -13,10 +13,10 @@ export default {
     withPluginApi('0.8.12', api => {
       const user = api.getCurrentUser();
 
-      // Check if the user is in the hide_devs group.
+      // Check if the user is in the hide_developers group.
       user.findDetails().then(function () {
         const groups = user.get('groups');
-        const inHideGroup = groups.find((g) => g.name == "hide_devs");
+        const inHideGroup = groups.find((g) => g.name == "hide_developers");
 
         // if so, then enable the plugin.
         if (inHideGroup) {
