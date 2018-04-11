@@ -39,8 +39,6 @@ function initializeHideToggle(api) {
               var groupHide = usr._result.groups.find((g) => g.name == "hide_devs");
               if (groupHide != undefined) {
                 console.log("Enabling hide plugin because user is allowed.");
-
-
                 api.onToolbarCreate(toolbar => {
                   toolbar.addButton({
                     id: "toggle_hide_devs_btn",
@@ -74,14 +72,14 @@ function initializeHideToggle(api) {
     }
   }
 
-  //  api.includePostAttributes('hide_devs');
+  api.includePostAttributes('hide_devs');
 
   api.modifyClass('model:composer', {
     hide_devs: hide,
 
-    //    @on('init')
-    //    @observes('post')
-    @observes('composeState')
+    //@observes('composeState')
+    @on('init')
+    @observes('post')
     setHide() {
       const post = this.get('post');
       //      if (post) {
@@ -95,7 +93,17 @@ function initializeHideToggle(api) {
       //        console.log("no post?! " + hide);
       //      }
       //      console.log("2:");
-      console.log(this);
+      //      console.log(this);
+      var btn = document.getElementsByClassName("toggle_hide_devs_btn")[0];
+      if (btn) {
+        if (hide) {
+          btn.style.backgroundColor = "rgb(221, 93, 93)";
+          btn.style.color = "white";
+        } else {
+          btn.style.backgroundColor = "transparent";
+          btn.style.color = "";
+        }
+      }
     },
   });
 }
