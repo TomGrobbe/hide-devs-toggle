@@ -19,7 +19,16 @@ var stop = false;
 var hide = true;
 
 function initializeHideToggle(api) {
-
+  var btn = document.getElementsByClassName("toggle_hide_devs_btn")[0];
+  if (btn) {
+    if (hide) {
+      btn.style.backgroundColor = "rgb(221, 93, 93)";
+      btn.style.color = "white";
+    } else {
+      btn.style.backgroundColor = "transparent";
+      btn.style.color = "";
+    }
+  }
   if (Discourse != undefined) {
     if (Discourse.User != undefined) {
       if (Discourse.User.current() != undefined) {
@@ -31,30 +40,21 @@ function initializeHideToggle(api) {
               if (groupHide != undefined) {
                 console.log("Enabling hide plugin because user is allowed.");
 
-                var btn = document.getElementsByClassName("toggle_hide_devs_btn")[0];
-                if (btn) {
-                  if (hide) {
-                    btn.style.backgroundColor = "rgb(221, 93, 93)";
-                    btn.style.color = "white";
-                  } else {
-                    btn.style.backgroundColor = "transparent";
-                    btn.style.color = "";
-                  }
-                }
+
                 api.onToolbarCreate(toolbar => {
                   toolbar.addButton({
                     id: "toggle_hide_devs_btn",
                     group: "extras",
                     icon: "user-secret",
                     perform: function () {
-                      var btn = document.getElementsByClassName("toggle_hide_devs_btn")[0];
-                      if (btn != undefined && btn != null) {
+                      var btn2 = document.getElementsByClassName("toggle_hide_devs_btn")[0];
+                      if (btn2 != undefined && btn2 != null) {
                         if (hide) {
-                          btn.style.backgroundColor = "rgb(221, 93, 93)";
-                          btn.style.color = "white";
+                          btn2.style.backgroundColor = "rgb(221, 93, 93)";
+                          btn2.style.color = "white";
                         } else {
-                          btn.style.backgroundColor = "transparent";
-                          btn.style.color = "";
+                          btn2.style.backgroundColor = "transparent";
+                          btn2.style.color = "";
                         }
                         hide = !hide;
                         console.log('New state after button press: ' + hide);
