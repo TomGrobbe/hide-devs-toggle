@@ -6,6 +6,7 @@ import ComposerController from 'discourse/controllers/composer';
 import {
 	onToolbarCreate
 } from 'discourse/components/d-editor';
+import Composer from 'discourse/models/composer';
 
 
 var stop = false;
