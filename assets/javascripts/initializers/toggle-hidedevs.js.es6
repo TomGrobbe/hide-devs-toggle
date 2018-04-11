@@ -35,19 +35,10 @@ function initializeHideToggle(api) {
                     group: "extras",
                     icon: "user-secret",
                     perform: function () {
-                      //                      var btn2 = document.getElementsByClassName("toggle_hide_devs_btn")[0];
                       var btn2 = $(".toggle_hide_devs_btn");
                       if (btn2 != undefined && btn2 != null) {
                         btn2.toggleClass("dis", hide);
-                        //                        if (hide) {
-                        //                          btn2.style.backgroundColor = "rgb(221, 93, 93)";
-                        //                          btn2.style.color = "#646464";
-                        //                        } else {
-                        //                          btn2.style.backgroundColor = "transparent";
-                        //                          btn2.style.color = "#646464";
-                        //                        }
                         hide = !hide;
-                        this.set('hide_devs', hide);
                         console.log('New state after button press: ' + hide);
                       }
                     }
@@ -70,45 +61,11 @@ function initializeHideToggle(api) {
   api.modifyClass('model:composer', {
     hide_devs: hide,
 
-    //@observes('composeState')
-
     @on('init')
     @observes('post')
     @observes('model.composeState')
     setHide() {
-      //      const post = this.get('post');
-      //      if (post) {
-
-      //      console.log("1:");
-      //      console.log(this);
-
       this.set('hide_devs', hide);
-      //      console.log("hide_post is now set to: " + hide);
-      //      console.log(this.get('hide_devs'));
-      //      } else {
-      //        console.log("no post?! " + hide);
-      //      }
-      //      console.log("2:");
-      console.log(this);
-      //      var btn3 = document.getElementsByClassName("toggle_hide_devs_btn")[0];
-      var btn3 = $(".toggle_hide_devs_btn");
-      if (btn3 != undefined) {
-        //        if (hide) {
-        //        console.log("hiding");
-        //    btn3.toggleClass()
-
-        //          btn3.style.backgroundColor = "rgb(221, 93, 93)";
-        //          btn3.style.color = "#646464";
-        //        } else {
-        //          console.log("showing");
-        //          btn3.style.backgroundColor = "transparent";
-        //          btn3.style.color = "#646464";
-        //        }
-        btn3.toggleClass("dis", hide);
-        console.log("toggling button: " + btn3);
-      } else {
-        console.log("it's null...");
-      }
     },
   });
 }
