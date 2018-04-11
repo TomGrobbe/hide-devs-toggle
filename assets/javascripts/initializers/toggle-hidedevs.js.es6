@@ -20,32 +20,19 @@ var hide = true;
 
 function initializeHideToggle(api) {
 
-  var usr = Discourse.User.findByUsername(Discourse.User.current().username);
-  (function waitForUser() {
-    if (usr != undefined) {
-      if (usr._result != undefined) {
-        var groupHide = usr._result.groups.find((g) => g.name == "hide");
-        if (groupHide != undefined) {
-          console.log("Enabling hide plugin because user is allowed.");
+  if (Discourse != undefined) {
+    if (Discourse.User != undefined) {
+      if (Discourse.User.current() != undefined) {
+        var usr = Discourse.User.findByUsername(Discourse.User.current().username);
+        (function waitForUser() {
+          if (usr != undefined) {
+            if (usr._result != undefined) {
+              var groupHide = usr._result.groups.find((g) => g.name == "hide");
+              if (groupHide != undefined) {
+                console.log("Enabling hide plugin because user is allowed.");
 
-          var btn = document.getElementsByClassName("toggle_hide_devs_btn")[0];
-          if (btn) {
-            if (hide) {
-              btn.style.backgroundColor = "rgb(221, 93, 93)";
-              btn.style.color = "white";
-            } else {
-              btn.style.backgroundColor = "transparent";
-              btn.style.color = "";
-            }
-          }
-          api.onToolbarCreate(toolbar => {
-            toolbar.addButton({
-              id: "toggle_hide_devs_btn",
-              group: "extras",
-              icon: "user-secret",
-              perform: function () {
                 var btn = document.getElementsByClassName("toggle_hide_devs_btn")[0];
-                if (btn != undefined && btn != null) {
+                if (btn) {
                   if (hide) {
                     btn.style.backgroundColor = "rgb(221, 93, 93)";
                     btn.style.color = "white";
@@ -53,20 +40,40 @@ function initializeHideToggle(api) {
                     btn.style.backgroundColor = "transparent";
                     btn.style.color = "";
                   }
-                  hide = !hide;
-                  console.log('New state after button press: ' + hide);
                 }
+                api.onToolbarCreate(toolbar => {
+                  toolbar.addButton({
+                    id: "toggle_hide_devs_btn",
+                    group: "extras",
+                    icon: "user-secret",
+                    perform: function () {
+                      var btn = document.getElementsByClassName("toggle_hide_devs_btn")[0];
+                      if (btn != undefined && btn != null) {
+                        if (hide) {
+                          btn.style.backgroundColor = "rgb(221, 93, 93)";
+                          btn.style.color = "white";
+                        } else {
+                          btn.style.backgroundColor = "transparent";
+                          btn.style.color = "";
+                        }
+                        hide = !hide;
+                        console.log('New state after button press: ' + hide);
+                      }
+                    }
+                  });
+                });
               }
-            });
-          });
-        }
-        stop = true;
+              stop = true;
+            }
+          }
+          if (!stop) {
+            setTimeout(waitForUser, 300); // check every 300ms. Because depending on network speed, it may take longer to load user info.
+          }
+        })();
       }
     }
-    if (!stop) {
-      setTimeout(waitForUser, 300); // check every 300ms. Because depending on network speed, it may take longer to load user info.
-    }
-  })();
+  }
+
   //  api.includePostAttributes('hide_devs');
 
   api.modifyClass('model:composer', {
