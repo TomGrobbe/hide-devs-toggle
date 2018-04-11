@@ -90,7 +90,8 @@ function initializeHideToggle(api) {
       //      console.log("2:");
       console.log(this);
       console.log(this.post);
-      console.log(Discourse.User.Current());
+      console.log(Discourse.User.current());
+      console.log(Discourse.Groups)
     },
   });
 }
