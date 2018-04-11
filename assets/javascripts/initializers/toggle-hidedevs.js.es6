@@ -162,7 +162,7 @@ function initializeHideToggle(api) {
 export default {
 	name: "toggle-hidedevs",
 	initialize(container) {
-		Composer.seralizeOnCreate('hide_post');
+		Composer.serializeOnCreate('hide_post');
 		withPluginApi('0.8.10', api => {
 			api.includePostAttributes('hide_post');
 			api.modifyClass('model:composer', {
