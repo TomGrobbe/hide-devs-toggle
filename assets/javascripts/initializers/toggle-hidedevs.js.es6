@@ -16,7 +16,7 @@ import {
 
 
 var stop = false;
-var hide = true;
+var hide = false;
 
 function initializeHideToggle(api) {
 
