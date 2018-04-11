@@ -44,7 +44,9 @@ after_initialize do
 	class ::WebHookTopicViewSerializer
 		prepend ::HideDevs::WebHookTopicViewSerializerExtensions
 	end
-	
+  
+    add_permitted_post_create_param('hide_post')
+
 	DiscourseEvent.on(:post_created) do |post, opts, user|
 		#		next unless ((user.group_ids.include? hide.id) && !(opts[:raw].to_s.include? "<NoHideDevs>"))
 		next unless ((user.group_ids.include? hide.id) && (opts[:hide_post] == true))
