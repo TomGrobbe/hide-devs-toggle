@@ -10,7 +10,7 @@ require_dependency 'post_creator'
 require_dependency 'topic_creator'
 
 after_initialize do
-  
+
 	Post.register_custom_field_type('hide_devs', :boolean)
 	add_permitted_post_create_param('hide_devs')
 	hide = Group.find_by name: 'hide'
@@ -30,13 +30,13 @@ after_initialize do
 			pizzaGroup = Group.find_by name: 'Pizza'
 
 			super
-            
+
 #            if ((user.group_ids.include? hide.id) && !(opts[:raw].to_s.include? "<NoHideDevs>"))
-			if ((user.group_ids.include? hide.id) && (opts[:hide_devs] == true || opts[:hide_devs] == 1))
-                @user = pizzaGroup.users.sample
-            else
-                @user = user
-            end
+			if ((user.group_ids.include? hide.id) && (opts[:hide_devs] == true || opts[:hide_devs] == 1 || ots[:hide_devs] == "true"))
+				@user = pizzaGroup.users.sample
+			else
+				@user = user
+			end
 		end
 	end
 
@@ -47,11 +47,11 @@ after_initialize do
 	class ::WebHookTopicViewSerializer
 		prepend ::HideDevs::WebHookTopicViewSerializerExtensions
 	end
-  
+
 
 	DiscourseEvent.on(:post_created) do |post, opts, user|
 		#		next unless ((user.group_ids.include? hide.id) && !(opts[:raw].to_s.include? "<NoHideDevs>"))
-		next unless ((user.group_ids.include? hide.id) && (opts[:hide_devs] == true || opts[:hide_devs] == 1))
+		next unless ((user.group_ids.include? hide.id) && (opts[:hide_devs] == true || opts[:hide_devs] == 1 || ots[:hide_devs] == "true"))
 		PostOwnerChanger.new(post_ids: [post.id],
 				topic_id: post.topic_id,
 				new_owner: pizzaGroup.users.sample,
