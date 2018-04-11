@@ -7,6 +7,12 @@ import {
 	onToolbarCreate
 } from 'discourse/components/d-editor';
 import Composer from 'discourse/models/composer';
+import {
+	default as computed,
+	on,
+	observes
+} from 'ember-addons/ember-computed-decorators';
+
 
 
 var stop = false;
@@ -157,7 +163,7 @@ export default {
 	name: "toggle-hidedevs",
 	initialize(container) {
 		Composer.seralizeOnCreate('hide_post');
-		withPluginApi('0.8.12', api => {
+		withPluginApi('0.8.10', api => {
 			api.includePostAttributes('hide_post');
 			api.modifyClass('model:composer', {
 				hide_post: true,
@@ -171,7 +177,7 @@ export default {
 					}
 				},
 			});
-		})
+		});
 		const siteSettings = container.lookup('site-settings:main');
 		if (siteSettings.hide_devs_enabled) {
 			withPluginApi('0.1', api => initializeHideToggle(api), {
