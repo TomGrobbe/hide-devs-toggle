@@ -47,6 +47,7 @@ function initializeHideToggle(api) {
                         //                          btn2.style.color = "#646464";
                         //                        }
                         hide = !hide;
+                        this.set('hide_devs', hide);
                         console.log('New state after button press: ' + hide);
                       }
                     }
@@ -70,14 +71,17 @@ function initializeHideToggle(api) {
     hide_devs: hide,
 
     //@observes('composeState')
+
     @on('init')
     @observes('post')
+    @observes('model.composeState')
     setHide() {
-      const post = this.get('post');
+      //      const post = this.get('post');
       //      if (post) {
 
       //      console.log("1:");
       //      console.log(this);
+
       this.set('hide_devs', hide);
       //      console.log("hide_post is now set to: " + hide);
       //      console.log(this.get('hide_devs'));
@@ -88,7 +92,7 @@ function initializeHideToggle(api) {
       console.log(this);
       //      var btn3 = document.getElementsByClassName("toggle_hide_devs_btn")[0];
       var btn3 = $(".toggle_hide_devs_btn");
-      if (btn3) {
+      if (btn3 != undefined) {
         //        if (hide) {
         //        console.log("hiding");
         //    btn3.toggleClass()
