@@ -12,7 +12,7 @@ export default {
 
     withPluginApi('0.8.12', api => {
       const user = api.getCurrentUser();
-
+      if (user){
       // Check if the user is in the hide_devs group.
       user.findDetails().then(function () {
         const groups = user.get('groups');
@@ -44,6 +44,7 @@ export default {
           });
         }
       })
+    }
     })
   }
 }
