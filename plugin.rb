@@ -1,6 +1,5 @@
 # name: hide_devs
 # about: Hide developers discourse plugin.
-# version: 2.2
 # version: 2.0
 # authors: CitizenFX Collective & Vespura
 # url: https://github.com/TomGrobbe/hide-devs-toggle
