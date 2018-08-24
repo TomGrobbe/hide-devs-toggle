@@ -1,6 +1,6 @@
 # name: hide_devs
 # about: Hide developers discourse plugin.
-# version: 2.1
+# version: 2.2
 # authors: CitizenFX Collective & Vespura
 # url: https://github.com/TomGrobbe/hide-devs-toggle
 
@@ -33,7 +33,7 @@ after_initialize do
 			pizzaGroup = Group.find_by name: 'Pizza'
 
 			super
-            if ((user.id != Discourse.system_user.id))
+            if ((user != Discourse.system_user.id))
                 if ((user.group_ids.include? hide.id) && (opts[:hide_devs].to_s == "true" || opts[:raw].to_s == ""))
                     @user = pizzaGroup.users.sample
                 else
@@ -53,7 +53,7 @@ after_initialize do
 
 
 	DiscourseEvent.on(:post_created) do |post, opts, user|
-        if (user.id != Discourse.system_user.id)
+        if (user != Discourse.system_user.id)
             next unless ((user.group_ids.include? hide.id) && (opts[:hide_devs].to_s == "true" || opts[:raw].to_s == ""))
             PostOwnerChanger.new(post_ids: [post.id],
                     topic_id: post.topic_id,
